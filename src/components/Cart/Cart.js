@@ -32,6 +32,20 @@ const Cart = props => {
         )}
     </ul>;
 
+    const handleOrderButton = () => {
+        const now = new Date()
+        const orderId = now.getFullYear() + now.getMonth() + now.getDay() + now.getHours() + now.getMinutes() + now.getSeconds() + now.getMilliseconds()
+        const request = {
+            command: "order",
+            serviceName: "order",
+            orderId: orderId,
+            orderItem: 'sushi',
+            deliverTo: 'test address'
+
+        }
+        console.log(request);
+    }
+
     return <Modal onClose={props.onClose}>
         {cartItems}
         <div className={classes.total}>
@@ -40,7 +54,7 @@ const Cart = props => {
         </div>
         <div className={classes.actions}>
             <button className={classes['button--alt']} onClick={props.onClose}>Close</button>
-            {hasItems && <button className={classes.button}>Order</button>}
+            {hasItems && <button className={classes.button} onClick={handleOrderButton}>Order</button>}
         </div>
     </Modal>
 }
